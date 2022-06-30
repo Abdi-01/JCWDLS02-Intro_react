@@ -1,13 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
+import HomePage from './Pages/HomePage';
 
+// functional component
 function App() {
   return (
     <div className="App">
+      <HomePage/>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Welcome to React Environtment
         </p>
         <a
           className="App-link"
