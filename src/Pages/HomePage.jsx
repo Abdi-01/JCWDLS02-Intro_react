@@ -31,7 +31,7 @@ class HomePage extends React.Component {
     printDataForLop = () => {
         let temp = [];
         for (let index = 0; index < this.state.data.length; index++) {
-            temp.push(<div className="row">
+            temp.push(<div className="row"  key={this.state.data[index].id}>
                 <div className="col-12 col-md-8" style={{ textAlign: "left" }}>
                     {
                         this.state.data[index].todo
@@ -50,8 +50,8 @@ class HomePage extends React.Component {
     }
 
     printDataMap = () => {
-        return  this.state.data.map((value, index) => {
-            return <div className="row">
+        return this.state.data.map((value, index) => {
+            return <div className="row" key={value.id}>
                 <div className="col-12 col-md-8">
                     {value.todo}
                 </div>
@@ -62,6 +62,7 @@ class HomePage extends React.Component {
                 </div>
             </div>
         })
+
     }
 
 
@@ -81,8 +82,12 @@ class HomePage extends React.Component {
                     </div>
                     <div>
                         {
-                            // this.printDataForLop()
-                            this.printDataMap()
+                            this.printDataForLop()
+                        }
+                    </div>
+                    <div>
+                        {
+                            // this.printDataMap()
                         }
                     </div>
                 </div>
