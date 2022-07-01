@@ -31,7 +31,7 @@ class HomePage extends React.Component {
     printDataForLop = () => {
         let temp = [];
         for (let index = 0; index < this.state.data.length; index++) {
-            temp.push(<div className="row"  key={this.state.data[index].id}>
+            temp.push(<div className="row" key={this.state.data[index].id}>
                 <div className="col-12 col-md-8" style={{ textAlign: "left" }}>
                     {
                         this.state.data[index].todo
@@ -49,16 +49,27 @@ class HomePage extends React.Component {
 
     }
 
+    btnDelete = (idx) => {
+        let temp = [...this.state.data];
+        temp.splice(idx, 1);
+        this.setState({ data: temp });
+    }
+
     printDataMap = () => {
         return this.state.data.map((value, index) => {
-            return <div className="row" key={value.id}>
-                <div className="col-12 col-md-8">
+            return <div className="row card my-2" key={value.id}>
+                <div className="col-12 col-sm-12 col-md-8">
                     {value.todo}
                 </div>
-                <div className="col-12 col-md-4">
+                <div className="col-12 col-sm-12 col-md-4">
                     <button className="btn btn-danger">UnDone</button>
                     <button className="btn btn-warning">Edit</button>
-                    <button className="btn btn-outline-danger">Delete</button>
+                    <button
+                        type="button"
+                        onClick={() => this.btnDelete(index)}
+                        className="btn btn-outline-danger">
+                        Delete
+                    </button>
                 </div>
             </div>
         })
@@ -82,12 +93,12 @@ class HomePage extends React.Component {
                     </div>
                     <div>
                         {
-                            this.printDataForLop()
+                            // this.printDataForLop()
                         }
                     </div>
                     <div>
                         {
-                            // this.printDataMap()
+                            this.printDataMap()
                         }
                     </div>
                 </div>
