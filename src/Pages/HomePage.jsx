@@ -49,6 +49,21 @@ class HomePage extends React.Component {
 
     }
 
+    printDataMap = () => {
+        return  this.state.data.map((value, index) => {
+            return <div className="row">
+                <div className="col-12 col-md-8">
+                    {value.todo}
+                </div>
+                <div className="col-12 col-md-4">
+                    <button className="btn btn-danger">UnDone</button>
+                    <button className="btn btn-warning">Edit</button>
+                    <button className="btn btn-outline-danger">Delete</button>
+                </div>
+            </div>
+        })
+    }
+
 
     // Fungsi method untuk merender component html react nantinya
     render() {
@@ -66,7 +81,8 @@ class HomePage extends React.Component {
                     </div>
                     <div>
                         {
-                            this.printDataForLop()
+                            // this.printDataForLop()
+                            this.printDataMap()
                         }
                     </div>
                 </div>
