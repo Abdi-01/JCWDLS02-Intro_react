@@ -28,6 +28,26 @@ class HomePage extends React.Component {
         this.setState({ data: temp });
     }
 
+    printDataForLop = () => {
+        let temp = [];
+        for (let index = 0; index < this.state.data.length; index++) {
+            temp.push(<div className="row">
+                <div className="col-12 col-md-8" style={{ textAlign: "left" }}>
+                    {
+                        this.state.data[index].todo
+                    }
+                </div>
+                <div className="col-12 col-md-4">
+                    <button className="btn btn-danger">UnDone</button>
+                    <button className="btn btn-warning">Edit</button>
+                    <button className="btn btn-outline-danger">Delete</button>
+                </div>
+            </div>)
+        }
+
+        return temp;
+
+    }
 
 
     // Fungsi method untuk merender component html react nantinya
@@ -43,6 +63,11 @@ class HomePage extends React.Component {
                     </div>
                     <div className="alert alert-primary my-2 shadow-sm">
                         {data.length} Task
+                    </div>
+                    <div>
+                        {
+                            this.printDataForLop()
+                        }
                     </div>
                 </div>
             </div>
