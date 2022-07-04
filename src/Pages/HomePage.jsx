@@ -11,11 +11,13 @@ class HomePage extends React.Component {
             data: [
                 {
                     id: 1,
-                    todo: "Module front-end intro"
+                    todo: "Module front-end intro",
+                    status: "UnDone"
                 },
                 {
                     id: 2,
-                    todo: "Module back-end intro"
+                    todo: "Module back-end intro",
+                    status: "UnDone"
                 }
             ],
             todo: "",
@@ -70,6 +72,13 @@ class HomePage extends React.Component {
         this.setState({ selectedId: id });
     }
 
+    btnDone = (id) => {
+        let temp = [...this.state.data];
+        let idx = temp.findIndex(val => val.id == id);
+        temp[idx].status = "Done";
+        this.setState({ data: temp });
+    }
+
     printDataMap = () => {
         return this.state.data.map((value, index) => {
             if (value.id == this.state.selectedId) {
@@ -78,7 +87,7 @@ class HomePage extends React.Component {
                         <input className="form-control" type="text" defaultValue={value.todo} />
                     </div>
                     <div className="col-12 col-sm-12 col-md-4">
-                        <button className="btn btn-danger">UnDone</button>
+                        <button className="btn btn-danger">{value.status}</button>
                         <button
                             type="button"
                             className="btn btn-primary"
@@ -99,10 +108,22 @@ class HomePage extends React.Component {
                         {value.todo}
                     </div>
                     <div className="col-12 col-sm-12 col-md-4">
-                        <button className="btn btn-danger">UnDone</button>
+                        {
+                            value.status == "Done" ?
+                                <button className="btn btn-success" disabled>{value.status}</button>
+                                :
+                                <button
+                                    className="btn btn-danger"
+                                    type="button"
+                                    onClick={() => this.btnDone(value.id)}
+                                >
+                                    {value.status}
+                                </button>
+                        }
                         <button
                             type="button"
                             className="btn btn-warning"
+                            disabled={value.status == "Done" ? true : false}
                             onClick={() => this.btnEdit(value.id)}>
                             Edit
                         </button>
