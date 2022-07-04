@@ -8,8 +8,18 @@ class HomePage extends React.Component {
         // Media penyimpanan utama pada setiap component react
         this.state = {
             counter: 0,
-            data: [],
-            todo: ""
+            data: [
+                {
+                    id: 1,
+                    todo: "Module front-end intro"
+                },
+                {
+                    id: 2,
+                    todo: "Module back-end intro"
+                }
+            ],
+            todo: "",
+            selectedId: null
         }
     }
 
@@ -55,23 +65,56 @@ class HomePage extends React.Component {
         this.setState({ data: temp });
     }
 
+    btnEdit = (id) => {
+        console.log("Cek selected id", id);
+        this.setState({ selectedId: id });
+    }
+
     printDataMap = () => {
         return this.state.data.map((value, index) => {
-            return <div className="row card my-2" key={value.id}>
-                <div className="col-12 col-sm-12 col-md-8">
-                    {value.todo}
+            if (value.id == this.state.selectedId) {
+                return <div className="row card my-2" key={value.id}>
+                    <div className="col-12 col-sm-12 col-md-8">
+                        <input className="form-control" type="text" defaultValue={value.todo} />
+                    </div>
+                    <div className="col-12 col-sm-12 col-md-4">
+                        <button className="btn btn-danger">UnDone</button>
+                        <button
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={() => this.btnEdit(value.id)}>
+                            Save
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => this.setState({ selectedId: null })}
+                            className="btn btn-outline-warning">
+                            Cancel
+                        </button>
+                    </div>
                 </div>
-                <div className="col-12 col-sm-12 col-md-4">
-                    <button className="btn btn-danger">UnDone</button>
-                    <button className="btn btn-warning">Edit</button>
-                    <button
-                        type="button"
-                        onClick={() => this.btnDelete(index)}
-                        className="btn btn-outline-danger">
-                        Delete
-                    </button>
+            } else {
+                return <div className="row card my-2" key={value.id}>
+                    <div className="col-12 col-sm-12 col-md-8">
+                        {value.todo}
+                    </div>
+                    <div className="col-12 col-sm-12 col-md-4">
+                        <button className="btn btn-danger">UnDone</button>
+                        <button
+                            type="button"
+                            className="btn btn-warning"
+                            onClick={() => this.btnEdit(value.id)}>
+                            Edit
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => this.btnDelete(index)}
+                            className="btn btn-outline-danger">
+                            Delete
+                        </button>
+                    </div>
                 </div>
-            </div>
+            }
         })
 
     }
