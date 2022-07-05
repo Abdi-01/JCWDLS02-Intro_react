@@ -6,8 +6,10 @@ import HomePage from './Pages/HomePage';
 function App() {
   return (
     <div className="App container">
-      <FunctionalComponent/>
-      <HomePage/>
+      <FunctionalComponent />
+      <HomePage
+        heading={<h1> To Do List App</h1>}
+      />
     </div>
   );
 }
